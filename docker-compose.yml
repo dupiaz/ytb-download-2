@@ -1,0 +1,16 @@
+services:
+  app:
+    image: ytb-downloader-base-dongphat:v1
+    container_name: ytb-download-app
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
+      # cookies.txt: xuất từ trình duyệt đã đăng nhập X.com
+      # để tải video private/sensitive. Để trống file nếu không cần.
+      - ./cookies.txt:/app/cookies.txt:ro
+    environment:
+      PYTHONUNBUFFERED: "1"
+    command: ["tail", "-f", "/dev/null"]
+    tty: true
+    ports:
+      - "8000:8000"
